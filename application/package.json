@@ -1,5 +1,5 @@
 {
-  "name": "loader",
+  "name": "application",
   "version": "0.1.0",
   "private": true,
   "main": "dist/index.js",
@@ -10,6 +10,8 @@
     "lint": "eslint --cache --fix --ext .ts .",
     "test": "jest",
     "migrate": "prisma migrate dev --preview-feature",
+    "client": "prisma generate",
+    "generate": "ts-node --transpile-only -r tsconfig-paths/register src/nexus",
     "start": "ts-node --transpile-only -r tsconfig-paths/register src/server"
   },
   "dependencies": {
@@ -18,7 +20,9 @@
     "dataloader": "2.0.0",
     "graphql": "15.5.0",
     "graphql-tag": "2.11.0",
-    "tsconfig-paths": "3.9.0"
+    "nexus": "1.0.0",
+    "tsconfig-paths": "3.9.0",
+    "stripe": "8.134.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",

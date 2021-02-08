@@ -1,0 +1,38 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./example.db"
+}
+
+generator prisma_client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  // Virtual relations
+  todos        TodoList[]
+  subscription Subscription?
+}
+
+model Subscription {
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+  tier   String
+}
+
+model TodoList {
+  id     Int        @id @default(autoincrement())
+  user   User       @relation(fields: [userId], references: [id])
+  userId Int
+  // Virtual relations
+  items  TodoItem[]
+}
+
+model TodoItem {
+  id      Int      @id @default(autoincrement())
+  list    TodoList @relation(fields: [listId], references: [id])
+  listId  Int
+  content String
+}
